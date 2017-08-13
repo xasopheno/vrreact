@@ -5,9 +5,10 @@ import websockets
 
 async def time(websocket, path):
     while True:
-        now = str(random.randrange(654654, 25454153))
-        await websocket.send(now)
-        await asyncio.sleep(random.random())
+        rand = str(random.randrange(654654, 25454153))
+        await websocket.send(rand)
+        await asyncio.sleep(.01)
+        print(rand)
 
 start_server = websockets.serve(time, '127.0.0.1', 5678)
 
