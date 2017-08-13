@@ -3,9 +3,8 @@ import {
   StyleSheet,
   Text,
   View,
-  Button
+  WebView
 } from 'react-native';
-import io from 'socket.io-client';
 
 class App extends Component {
   constructor() {
@@ -30,6 +29,8 @@ class App extends Component {
   }
 
   render() {
+
+
     return (
       <View style={styles.container}>
         <Text>Virtual Reality</Text>
@@ -42,7 +43,8 @@ class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20
+    paddingTop: 20,
+    flex: 1,
   }
 });
 
