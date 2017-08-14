@@ -14,7 +14,7 @@ class App extends Component {
       data: null,
     };
 
-    this.socket = new WebSocket('ws://10.0.1.181:5678/');
+    this.socket = new WebSocket(`ws://${this.readTextFile()}:5678/`);
   }
 
   componentWillMount() {
@@ -22,8 +22,8 @@ class App extends Component {
   }
 
   readTextFile() {
-    let txtFile = require('./Server/ip.json');
-    console.log(txtFile.ip)
+    let json = require('./Server/ip.json');
+    return(json.ip)
 }
 
   componentDidMount() {
