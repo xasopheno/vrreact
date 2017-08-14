@@ -13,8 +13,18 @@ class App extends Component {
       open: false,
       data: null,
     };
-    this.socket = new WebSocket('ws://127.0.0.1:5678/');
+
+    this.socket = new WebSocket('ws://10.0.1.181:5678/');
   }
+
+  componentWillMount() {
+    this.readTextFile()
+  }
+
+  readTextFile() {
+    let txtFile = require('./Server/ip.json');
+    console.log(txtFile.ip)
+}
 
   componentDidMount() {
     this.socket.onopen = () => this.socket.send(JSON.stringify({type: 'greet', payload: 'Hello Mr. Server!'}));
@@ -29,12 +39,15 @@ class App extends Component {
   }
 
   render() {
-
-
+    const Sound = require('./Sound.html');
     return (
       <View style={styles.container}>
         <Text>Virtual Reality</Text>
         <Text>{this.state.data}</Text>
+        <WebView
+          source={Sound}
+          style={{flex: 1}}
+        />
       </View>
     );
   }

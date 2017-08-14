@@ -2,6 +2,16 @@ import asyncio
 import datetime
 import random
 import websockets
+import socket
+import json
+
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("8.8.8.8", 80))
+ip = s.getsockname()[0]
+s.close()
+
+with open('./src/Server/ip.json', 'w') as outfile:
+    json.dump({'ip': ip}, outfile)
 
 async def time(websocket, path):
     while True:
@@ -10,7 +20,7 @@ async def time(websocket, path):
         await asyncio.sleep(.01)
         print(rand)
 
-start_server = websockets.serve(time, '127.0.0.1', 5678)
+start_server = websockets.serve(time, ip, 5678)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
