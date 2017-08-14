@@ -1,0 +1,19 @@
+<script>
+  var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  // create Oscillator
+  var oscillator = audioCtx.createOscillator();
+  oscillator.type = 'triangle';
+  oscillator.frequency.value = 300; // value in hertz
+  oscillator.start();
+  function startSound() {
+    console.log('startSound')
+    oscillator.frequency.value = Math.floor(Math.random() * (300 - 1000 + 1)) + 700; // value in hertz // value in hertz
+    oscillator.connect(audioCtx.destination);
+  }
+  function timeoutStart(){
+    window.onload = setInterval(function(){
+      startSound()
+    },100);
+  }
+  timeoutStart();
+</script>
